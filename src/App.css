@@ -1,0 +1,22 @@
+/* CSS to hide the "cast" icon in the video player controls */
+video::-webkit-media-controls-cast-button {
+    display: none;
+  }
+  
+  /* For non-Chrome browsers (may need different selectors for other browsers) */
+  video::-webkit-media-controls-fullscreen-button {
+    display: none;
+  }
+  
+  /* Hide the pop-out video button (may need different selectors for other browsers) */
+  video::-webkit-media-controls-picture-in-picture-button {
+    display: none;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align items horizontally */
+    justify-content: space-around; /* Optional: Distribute space around items */
+  }
+  
