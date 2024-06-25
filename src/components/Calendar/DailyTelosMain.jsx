@@ -96,6 +96,8 @@ const DailyTelosMain = ({events }) => {
         components={{
           eventWrapper: EventWrapper,
         }}
+        views={['month', 'agenda']} 
+
       />
 
       <Modal isOpen={isOpenSlotModal} onClose={onCloseSlotModal} size={"sm"}>

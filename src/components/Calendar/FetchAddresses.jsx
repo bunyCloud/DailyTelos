@@ -30,7 +30,7 @@ const FetchAddresses = ({ role, roleName }) => {
     }
 
     fetchAddresses();
-  }, [role, displayCalendar]);
+  }, [role, displayCalendar, roleName]);
 
   return (
     <>

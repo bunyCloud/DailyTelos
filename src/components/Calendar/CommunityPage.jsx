@@ -68,7 +68,7 @@ const CommunityPage = () => {
   }
 
   return (
-    <Center mt={2} bg="#00c8fb">
+    <Center mt={2} bg="#0181cc">
     <VStack>
       <Box bg="white" p={8} overflow="hidden" mt={4} mb={4}>
         <Link href="./" isExternal>
@@ -81,20 +81,21 @@ const CommunityPage = () => {
           borderBottomWidth="1px"
         >
           <Stack spacing="3">
-            <FetchCalendarInfoDynamic calendarAddress={calendarAddress} />
-            <Box></Box>
+            <FetchCalendarInfoDynamic owner={owner} calendarAddress={calendarAddress} />
+            
             <Grid
               templateColumns={{
                 base: "repeat(1, 1fr)",
                 sm: "repeat(2, 1fr)",
                 md: "repeat(3, 1fr)",
-                lg: "repeat(4, 1fr)",
+                lg: "repeat(3, 1fr)",
               }}
               gap={"auto"}
-              width="250px"
+              width="auto"
               height="100%"
               //maxWidth={350}
             >
+            {/**
               <GridItem>
                 <Box
                   height="100%"
@@ -107,18 +108,19 @@ const CommunityPage = () => {
                     <Text fontSize="lg">Administrators</Text>
                   </HStack>
                   <FetchAddresses role={ADMIN_ROLE} roleName={"Admin"} />
-                </Box>
+                </Box> 
               </GridItem>
+              */}
               <GridItem>
                 <Box
                   height="100%"
                   width="100%"
-                  padding={4}
+                  padding={2}
                   borderWidth="1px"
                   borderRadius="lg"
                 >
                   <HStack>
-                    <Text fontSize="lg">Members</Text>
+                    <Text fontSize="md" as='b'>Members</Text>
                   </HStack>
                   <FetchAddresses role={MEMBER_ROLE} roleName={"Members"} />
                 </Box>
@@ -127,12 +129,12 @@ const CommunityPage = () => {
                 <Box
                   height="100%"
                   width="100%"
-                  padding={4}
+                  padding={2}
                   borderWidth="1px"
                   borderRadius="lg"
                 >
                   <HStack>
-                    <Text fontSize="lg">Guests</Text>
+                    <Text fontSize="md" as='b'>Guests</Text>
                   </HStack>
                   <FetchAddresses role={GUEST_ROLE} roleName={"Guest"} />
                 </Box>
@@ -150,7 +152,6 @@ const CommunityPage = () => {
           <FetchAllEventsDynamic calendarAddress={calendarAddress} />
         </Flex>
       </Box>
-<Text>Owner: {owner}</Text>
 
 
 

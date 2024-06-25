@@ -8,6 +8,7 @@ import {
   WrapItem,
   Heading,
   Icon,
+  Box,
 } from "@chakra-ui/react";
 import CalendarDailyTelos from "../../contracts/CalendarDailyTelos.json";
 import { ethers } from "ethers";
@@ -16,7 +17,7 @@ import { AppContext } from "../../AppContext";
 import CopyToClipboardButton from "../../utils/CopyToClipboardButton";
 
 
-const FetchCalendarInfoDynamic = ({ calendarAddress }) => {
+const FetchCalendarInfoDynamic = ({owner, calendarAddress }) => {
   const { rpcUrl } = useContext(AppContext);
   const [adminCount, setAdminCount] = useState(0);
   const [guestCount, setGuestCount] = useState(0);
@@ -96,63 +97,87 @@ const FetchCalendarInfoDynamic = ({ calendarAddress }) => {
             <AddGuestDynamic calendarAddress={calendarAddress} />
           </Box>
           */}
-          <HStack p={2} bg='whitesmoke'>
+          <HStack p={2} bg='whitesmoke' w='100%' justify='center'>
+          <Text as='b'>Group:</Text>
             <Text
               fontSize={"12px"}
               w="auto"
-              maxWidth="260px"
+              bg='white'
+              border='1px solid silver'
+              p={1}
               overflow="auto"
               noOfLines={1}
               
             >
+            
               {calendarAddress}
             </Text>
             <CopyToClipboardButton value={calendarAddress} />
           </HStack>
 
-          <HStack p={2} bg='whitesmoke'>
-          <Text fontSize={'12px'} w='auto' maxWidth='260px' overflow='auto' noOfLines={1} mt={2}>
+          <HStack p={2} bg='whitesmoke' w='100%' justify='center'>
+          <Text as='b'>Owner: </Text>
+            <Text
+              fontSize={"12px"}
+              w="auto"
+              bg='white'
+              border='1px solid silver'
+              p={1}
+              overflow="auto"
+              noOfLines={1}
+              
+            >
+            
+              {owner}
+            </Text>
+            <CopyToClipboardButton value={owner} />
+          </HStack>
+
+          <HStack p={2} bg='whitesmoke' w='100%'>
+          <Text as='b'>Profile:</Text>
+            <Text
+              fontSize={"12px"}
+              w="auto"
+              bg='white'
+              border='1px solid silver'
+              p={1}
+              overflow="auto"
+              noOfLines={1}
+              maxWidth={270}
+              
+            >
             {`https://dailytelos.netlify.app/${calendarAddress}`}
           </Text>
             <CopyToClipboardButton value={`https://dailytelos.netlify.app/${calendarAddress}`} />
           </HStack>
 
-          
+          <WrapItem>
+              <Box>
+              <>Admins: {adminCount}</>
+              </Box>
+            </WrapItem>
 
           <Wrap w="auto" justify={"center"}>
             <WrapItem>
-              <NoticeBar
-                style={{ width: "150px" }}
-                color="default"
-                
-                content={<>Guest: {guestCount}</>}
-              />
+              <Box>
+              <>Guest: {guestCount}</>
+              </Box>
             </WrapItem>
+            
             <WrapItem>
-              <NoticeBar
-                style={{ width: "150px" }}
-                color="default"
-                
-                content={<>Members: {memberCount}</>}
-              />
+              <Box>
+              <>Members: {memberCount}</>
+              </Box>
             </WrapItem>
-            <WrapItem>
-              <NoticeBar
-                style={{ width: "150px" }}
-                color="default"
-                
-                content={<>Admins: {adminCount}</>}
-              />
-            </WrapItem>
-            <WrapItem>
-              <NoticeBar
-                style={{ width: "150px" }}
-                color="info"
-                
-                content={<>Events: {totalEvents}</>}
-              />
-            </WrapItem>
+            
+            
+            
+            
+            
           </Wrap>
+          <Box p={2}>
+          <>Total Events: {totalEvents}</>
+          </Box>
         </VStack>
       </Center>
     </div>
