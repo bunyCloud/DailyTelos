@@ -83,7 +83,7 @@ const DailyTelosMain = ({events }) => {
         defaultView="month"
         popup={true}
         events={events}
-        style={{ height: "80vh", width: "100%", backgroundColor:'white', color:'black', border:'1p solid silver', borderRadius:'4px' }}
+        style={{ height: "90vh", width: "100%", backgroundColor:'white', color:'black', border:'1p solid silver', borderRadius:'6px', marginTop:'2px', marginBottom:'8px' }}
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectEvent}
         selectable

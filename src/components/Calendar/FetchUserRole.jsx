@@ -7,6 +7,8 @@ import {
   Center,
   HStack,
   Heading,
+  IconButton,
+  Link,
   StackDivider,
   Text,
   VStack,
@@ -14,9 +16,10 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { AppContext } from "../../AppContext";
-import { formatAddress } from "../../utils/formatMetamask";
 import CreateCalendarForm from "../Forms/CreateCalendarForm";
 import AdminMenu from "../Menu/AdminMenu";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import MemberRegistrationFee from "./MemberRegistrationFee";
 
 export default function FetchUserRole() {
   const {
@@ -39,53 +42,66 @@ export default function FetchUserRole() {
   const adminRole =
     "0xa49807205ce4d355092ef5a8a18f56e8913cf4a201fbe287825b095693c21775";
 
-  useEffect(() => {
-    const fetchUserRole = async () => {
-      const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
-      const contract = new ethers.Contract(
-        displayCalendar,
-        CalendarDailyTelos.abi,
-        provider,
-      );
-      const guest = await contract.hasRole(guestRole, account);
-      if (guest) {
-        setGuestRole(guest);
-      }
-      const member = await contract.hasRole(memberRole, account);
-      if (member) {
-        setMemberRole(member);
-      }
-      const admin = await contract.hasRole(adminRole, account);
-      if (admin) {
-        setAdminRole(admin);
-      }
-      console.log("checking user role...");
-    };
-
-    fetchUserRole();
-  }, [displayCalendar, account]);
-
+    useEffect(() => {
+      const fetchUserRole = async () => {
+        const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+        const contract = new ethers.Contract(
+          displayCalendar,
+          CalendarDailyTelos.abi,
+          provider,
+        );
+    
+        try {
+          const guest = await contract.hasRole(guestRole, account);
+          setGuestRole(guest || null);
+    
+          const member = await contract.hasRole(memberRole, account);
+          setMemberRole(member || null);
+    
+          const admin = await contract.hasRole(adminRole, account);
+          setAdminRole(admin || null);
+        } catch (error) {
+          console.error("Error fetching user roles:", error);
+          setGuestRole(null);
+          setMemberRole(null);
+          setAdminRole(null);
+        }
+    
+        console.log("checking user role...");
+      };
+    
+      fetchUserRole();
+    }, [displayCalendar, account]);
+    
   return (
     <Box>
       <Box p={1} >
-        {calendarName && (<><Heading  size="sm" color='blue'>Selected: {calendarName}</Heading></>)}
-        <Box w="100%">
-        <HStack w='100%' gap={'auto'}>
-          <HStack gap={'2px'}>
-            <Text as="b" textAlign="left">
-              Connected:{" "}
-            </Text>
-            <Text>{formatAddress(account)}</Text>
-          </HStack>
+        {calendarName && (<HStack ><Heading overflow='hidden' mb={1} mt={1}  size="md" color='blue' >{calendarName}</Heading>
+          <Link href={`./${displayCalendar}`} isExternal>
+                    <IconButton
+                      borderRadius={4}
+                      border="1px solid blue"
+                      bg="white"
+                      size="xs"
+                      aria-label="External"
+                      mr={4}
+                      icon={<ExternalLinkIcon />}
+                    />
+                  </Link>
 
-          {!isAdmin && !isGuest && !isMember ? (
+            
+        </HStack>)}
+        <Box w="100%">
+        {displayCalendar && !isAdmin && !isGuest && !isMember ? (
             <>
-              <Badge colorScheme="orange">No Role</Badge>
+
+              {/**<Badge colorScheme="orange">No Role</Badge> */}
+              
             </>
           ) : (
             <>
               <HStack gap={'2px'}>
-                <Text as="b" textAlign="left">
+                <Text fontSize='14px' as="b" textAlign="left">
                   Role:
                 </Text>
                 <Wrap>
@@ -111,7 +127,6 @@ export default function FetchUserRole() {
               </HStack>
             </>
           )}
-          </HStack>
         </Box>
       </Box>
 
@@ -131,7 +146,7 @@ export default function FetchUserRole() {
           )}
         </Box>
 
-        <Box h="auto" >
+        <Box h="auto" mb={1} >
           {isAdmin && (
             <>
               <AdminMenu />

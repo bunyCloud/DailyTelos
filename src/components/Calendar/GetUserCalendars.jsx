@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Box,Button, Center, HStack, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
+import { Box,Button, Center, HStack, IconButton, Link, List, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 import CalendarFactory from '../../contracts/CalendarFactory.json'
 import { formatAddress } from '../../utils/formatMetamask'
 import { AppContext } from '../../AppContext';
 import Button10 from '../Buttons/Button10';
+import { ExternalLinkIcon, RepeatIcon } from '@chakra-ui/icons';
 
 function GetUserCalendars({fetchAllEvents}) {
   const [calendars, setCalendars] = useState([]);
@@ -15,6 +16,17 @@ function GetUserCalendars({fetchAllEvents}) {
   const contractAddress = CalendarFactory.address;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const listContainerStyle = {
+    height: "auto",
+    maxHeight: "210px",
+    overflowY: "auto",
+    marginTop: "8px",
+    borderTop: "1px solid ThreeDFace",
+    fontSize: "12px",
+    color: "black",
+    backgroundColor: "white",
+  };
 
  
 
@@ -104,50 +116,63 @@ function GetUserCalendars({fetchAllEvents}) {
   }
 
   return (
-    <Box>
-      {calendars.length === 0 ? (
-        <Text as='b'>No calendars found for this user.</Text>
-      ) : (
-        <>
-        <Center>
-        <Text as='b' overflow={'hidden'}  > {calendars.length} deployment(s)</Text>
-        </Center>
-          <ul>
+    <Box style={listContainerStyle}>
+    {calendars.length === 0 ? (
+      <Text as="b">No calendars found for this user.</Text>
+    ) : (
+      <>
+        <Box>
+          <Text as="b" overflow={"hidden"}>
+            My deployment(s) {calendars.length} 
+          </Text>
+          <List spacing={2}>
             {calendars.map((calendar, index) => (
-              <li key={index}>
-                <Wrap  w='auto'  overflow={'auto'} >
-                  <WrapItem justify='center' w='100%'>
-                    
-                      <VStack w='100%' justify='center'>
+              <React.Fragment key={index}>
+                
+                  <HStack
+                    spacing={2}
+                    alignItems="center"
+                    justify="space-between"
+                  >
+                    <Button10
+                      onClick={() => handleCalendarSelect(calendar.address)}
+                      isSelected={selectedCalendar === calendar.address}
+                      width="100%"
+                    >
                       
-                      <HStack gap='auto'  w='100%' justify='center'>
+                        <Text as="b" overflow={"hidden"} w='100%'>
+                          {calendar.name}
+                        </Text>
+              
                       
-                      <Button10 
-                        
-                        onClick={() => handleCalendarSelect(calendar.address)}
-  isSelected={selectedCalendar === calendar.address}
-                        
-                        width='100%'
-                        
-                        >
-                          <HStack>
-                          <Text as='b' overflow={'hidden'}  >{calendar.name}</Text>
-                          <Text w={'auto'}  overflow={'hidden'} noOfLines={1}>{formatAddress(calendar.address)}</Text>
-                          </HStack>
-                        </Button10>
-                        
-                      </HStack>
+                    </Button10>
 
-                      </VStack>
-                      
-                  
-                  </WrapItem>
-                  <WrapItem>
-                </WrapItem>
-              </Wrap>
-            </li>
-          ))}
-        </ul>
+                    <Link href={`./${calendar.address}`} isExternal>
+                      <IconButton
+                        borderRadius={4}
+                        border="1px solid blue"
+                        bg="white"
+                        size="xs"
+                        aria-label="External"
+                        icon={<ExternalLinkIcon />}
+                      />
+                    </Link>
+
+                    <IconButton
+                      borderRadius={4}
+                      border="1px solid blue"
+                      bg="white"
+                      size="xs"
+                      onClick={fetchAllEvents}
+                      aria-label="Refresh"
+                      icon={<RepeatIcon />}
+                    />
+                  </HStack>
+                
+              </React.Fragment>
+            ))}
+          </List>
+        </Box>
       </>
     )}
   </Box>

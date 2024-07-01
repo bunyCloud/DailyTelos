@@ -46,7 +46,7 @@ const SidebarLayout = ({ account, events, displayCalendar, handleFetch }) => {
           <>
             <Box
               bg="white"
-              p={2}
+              p={1}
               w="100%"
               h="auto"
               borderRadius={6}
@@ -102,7 +102,7 @@ const SidebarLayout = ({ account, events, displayCalendar, handleFetch }) => {
                     <CalendarSelectorList fetchAllEvents={handleFetch} />            
                     </Box>
                   </TabPanel>
-                  <TabPanel>
+                  <TabPanel p={0}>
                     <Box h="auto" bg="white">
                       
                       <GetUserCalendars fetchAllEvents={handleFetch}/>
@@ -127,7 +127,8 @@ const SidebarLayout = ({ account, events, displayCalendar, handleFetch }) => {
             aria-label="Open sidebar"
             size="md"
             position="fixed"
-            m={2}
+            border='1px solid blue'
+            p={3}
             zIndex="overlay"
           />
           <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
@@ -152,7 +153,7 @@ const SidebarLayout = ({ account, events, displayCalendar, handleFetch }) => {
       )}
 
       {/* Main Content */}
-      <Box flex="1" p="2" h="100%">
+      <Box flex="1" p="4px" h="100%">
         {!displayCalendar ? (
           <>
             <IntroMp4 />

@@ -1,5 +1,5 @@
 {
-  "address": "0x1340FFa9023B3939d24df2acf287Cfd2e03a4cCa",
+  "address": "0xAe63A506c4E019049AF2301bEf0ace0e9231c366",
   "abi": [
     {
       "inputs": [],
@@ -36,6 +36,24 @@
       ],
       "name": "CalendarCreated",
       "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_calendarName",
+          "type": "string"
+        },
+        {
+          "internalType": "bool",
+          "name": "_visibility",
+          "type": "bool"
+        }
+      ],
+      "name": "createTelosCalendar",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
       "inputs": [
@@ -90,24 +108,6 @@
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "_calendarName",
-          "type": "string"
-        },
-        {
-          "internalType": "bool",
-          "name": "_visibility",
-          "type": "bool"
-        }
-      ],
-      "name": "createTelosCalendar",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [],
       "name": "getCalendars",
       "outputs": [
@@ -158,7 +158,7 @@
               "type": "bool"
             }
           ],
-          "internalType": "struct CalendarBankFactory.CalendarInfo[]",
+          "internalType": "struct CalendarFactory.CalendarInfo[]",
           "name": "",
           "type": "tuple[]"
         }

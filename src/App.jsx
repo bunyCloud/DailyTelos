@@ -67,7 +67,6 @@ function App() {
       const network = await provider.getNetwork();
       setChainId(network.chainId);
       setAccount(address);
-      console.log(`Connected Address Ready.. ${address}`);
       console.log(`Connected to chain Id: ${network.chainId}`);
     } else {
       console.log('Account not connected');
@@ -205,9 +204,8 @@ function App() {
               path="/"
               element={
                 <Box height="fit-content">
-                  <Flex direction="column" minHeight="calc(100vh - 60px)">
-                    {' '}
-                    {/* Adjust 60px based on actual NavBar + Footer height */}
+                  <Flex direction="column" minHeight="calc(100vh - 100px)">
+                    
                     <SidebarLayout
                       account={account}
                       events={events}
@@ -221,11 +219,10 @@ function App() {
 
             <Route path="/:calendarAddress" element={<CommunityPage />} />
           </Routes>
-</Box>
-          <FooterMain
-            style={{ flexShrink: 0, position: 'sticky', bottom: 0 }}
-          />
+            </Box>
+          <FooterMain style={{ flexShrink: 0, position: 'sticky', bottom: 0 }} />
           </Flex>
+
           <WhatAllEvents triggerFetch={fetchTrigger} />
         </div>
       </Router>

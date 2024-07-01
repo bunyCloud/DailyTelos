@@ -23,6 +23,7 @@ function AdminMenu() {
        // py={2}
         transition="all 0.2s"
         borderRadius="md"
+        border='1px solid blue'
         borderWidth="1px"
      //   bg='blue'
         fontSize='18px'
@@ -30,7 +31,7 @@ function AdminMenu() {
         
         _hover={{ bg: '#019cdf' }}
         _expanded={{ bg: 'gray.300' }}
-    //    _focus={{ boxShadow: 'outline' }}
+       _focus={{ boxShadow: 'outline' }}
       >
         Menu <ChevronDownIcon />
       </MenuButton>

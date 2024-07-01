@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "depcheck": "^1.4.7",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "eslint-config-react-app": "^7.0.1",
     "netlify-cli": "^16.4.2",
     "@playwright/test": "^1.12.3",

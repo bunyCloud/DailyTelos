@@ -15,7 +15,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import "react-datepicker/dist/react-datepicker.css";
-import CreateCalendarForm2 from "../Forms/CreateCalendarForm2";
+import CreateCalendarForm2 from "../Forms/CreateCalendarForm";
 
 const CreateCalendarModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
